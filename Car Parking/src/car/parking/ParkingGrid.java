@@ -4,21 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import java.io.*;
 
 public class ParkingGrid extends JPanel implements ActionListener
 {
+    
+    ParkingSpace[] parkingSpaces = new ParkingSpace[16];
 
     public ParkingGrid()
     {
+        for (int i = 0; i < 16; i++)
+        {
+            parkingSpaces[i] = new ParkingSpace(null, null);
+        }
+        
+        parkingSpaces[2] = new ParkingSpace(ParkingSpace.VehicleType.COACH, new Coach());
+        
         buildGUI();
     }
     
@@ -39,19 +44,11 @@ public class ParkingGrid extends JPanel implements ActionListener
         
         for (int i = 0; i < 4; i++)
         {
-            JButton space = new JButton();
-            space.setBackground(null);
-            space.setBorder(BorderFactory.createMatteBorder(0, 5, 5, 0, Color.red));
+            ParkingSpace space = parkingSpaces[i];
             
             if (i == 0)
             {
                 space.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 0, Color.red));
-                space.setIcon(new ImageIcon("images/lorry.png"));
-            }
-            
-            if (i == 1)
-            {
-                space.setIcon(new ImageIcon("images/coach.png"));
             }
 
             largeSpaces.add(space);
@@ -65,14 +62,13 @@ public class ParkingGrid extends JPanel implements ActionListener
         JPanel standardSpaces = new JPanel(new GridLayout(3, 4));
         standardSpaces.setPreferredSize(new Dimension(500, 348));
         standardSpaces.setBackground(Color.white);
+        int i = 4;
         
         for (int x = 0; x < 3; x++)
         {
             for (int y = 0; y < 4; y++)
             {
-                JButton space = new JButton();
-                space.setBackground(null);
-                space.setBorder(BorderFactory.createMatteBorder(0, 5, 5, 0, Color.red));
+                ParkingSpace space = parkingSpaces[i];
                 
                 if (y == 0)
                 {
@@ -89,17 +85,8 @@ public class ParkingGrid extends JPanel implements ActionListener
                     space.setBorder(null);
                 }
                 
-                if (x == 0 && y == 0)
-                {
-                    space.setIcon(new ImageIcon("images/car.png"));
-                }
-                
-                if (x == 0 && y == 3)
-                {
-                    space.setIcon(new ImageIcon("images/campervan.png"));
-                }
-                
                 standardSpaces.add(space);
+                i++;
             }    
         }        
         
