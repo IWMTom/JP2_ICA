@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.*;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class ParkingSpace extends JButton implements ActionListener
@@ -19,32 +17,25 @@ public class ParkingSpace extends JButton implements ActionListener
     
     public enum VehicleType {CAR, LORRY, COACH}
     
-    ParkingSpace(VehicleType type, Vehicle data)
+    ParkingSpace(VehicleType t, Vehicle d)
     {
         this.setBackground(null);
         this.setBorder(BorderFactory.createMatteBorder(0, 5, 5, 0, Color.red));
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));      
         this.addActionListener(this);
         
-        if (type == VehicleType.CAR)
-        {
-            this.setIcon(new ImageIcon("images/car.png"));
-        }
-        else if (type == VehicleType.COACH)
-        {
-            this.setIcon(new ImageIcon("images/coach.png"));
-        }
-        else if (type == VehicleType.LORRY)
-        {
-            this.setIcon(new ImageIcon("images/lorry.png"));
-        }
+        if (d != null)
+            this.setIcon(d.getImage());
+        
+        this.type = t;
+        this.data = d;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this)
         {
-            JOptionPane.showMessageDialog(this, "click");
+            JOptionPane.showMessageDialog(this, data.toString());
         }
     }
 }

@@ -47,7 +47,7 @@ public class Coach extends Vehicle
     @Override
     public ImageIcon getImage()
     {
-        return new ImageIcon(); // TODO 
+        return new ImageIcon("images/coach.png");
     }
 
     /**

@@ -22,7 +22,7 @@ public class ParkingGrid extends JPanel implements ActionListener
             parkingSpaces[i] = new ParkingSpace(null, null);
         }
         
-        parkingSpaces[2] = new ParkingSpace(ParkingSpace.VehicleType.COACH, new Coach());
+        parkingSpaces[2] = new ParkingSpace(ParkingSpace.VehicleType.COACH, new Coach("BF61YTJ", 5, false));
         
         buildGUI();
     }

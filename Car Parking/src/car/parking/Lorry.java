@@ -56,7 +56,7 @@ public class Lorry extends Vehicle
     @Override
     public ImageIcon getImage()
     {
-        return new ImageIcon(); // TODO        
+        return new ImageIcon("images/lorry.png");      
     }
 
     /**

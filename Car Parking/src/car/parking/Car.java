@@ -60,7 +60,7 @@ public class Car extends Vehicle
     @Override
     public ImageIcon getImage()
     {
-        return new ImageIcon(); // TODO
+        return new ImageIcon("images/car.png");
     }
 
     /**
