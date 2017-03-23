@@ -1,0 +1,1 @@
+Move parkingSpaces variable to outside of the ParkingGrid class, as ParkingGrid needs to be removed and readded when changes are made - it cannot be redrawn
