@@ -4,26 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 
-public class ParkingGrid extends JPanel implements ActionListener
+public class ParkingGrid extends JPanel
 {
-    
-    ParkingSpace[] parkingSpaces = new ParkingSpace[16];
 
-    public ParkingGrid()
+    private final ParkingSpace[] parkingSpaces;
+
+    public ParkingGrid(ParkingSpace[] parkingSpaces)
     {
-        for (int i = 0; i < 16; i++)
-        {
-            parkingSpaces[i] = new ParkingSpace(null, null);
-        }
-        
-        parkingSpaces[2] = new ParkingSpace(ParkingSpace.VehicleType.COACH, new Coach("BF61YTJ", 5, false));
-        
+        this.parkingSpaces = parkingSpaces;
         buildGUI();
     }
     
@@ -91,12 +84,6 @@ public class ParkingGrid extends JPanel implements ActionListener
         }        
         
         this.add(standardSpaces, BorderLayout.SOUTH);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
