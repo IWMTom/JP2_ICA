@@ -41,7 +41,7 @@ public class Coach extends Vehicle
     @Override
     public String toString()
     {
-        return regNumber + "," + charge + "," + numOfPassengers;
+        return "Registration Number: " + regNumber + " | Charge: £" + String.format("%1$.2f", charge) + " | Number of Passengers: " + numOfPassengers;
     }
     
     @Override

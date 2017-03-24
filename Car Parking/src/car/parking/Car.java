@@ -54,7 +54,7 @@ public class Car extends Vehicle
     @Override
     public String toString()
     {
-        return regNumber + "," + charge + "," + length;
+        return "Registration Number: " + regNumber + " | Charge: " + String.format("%1$.2f", charge) + " | Length: " + length;
     }
 
     @Override

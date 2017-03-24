@@ -20,7 +20,8 @@ public class GUI extends JPanel implements ActionListener, MouseListener
     {   
         clearSpaces();
         
-        parkingSpaces[2].update(ParkingSpace.VehicleType.COACH, new Coach("BF61YTJ", 5, false));
+        parkingSpaces[0].update(new Lorry("VK11LML", 25, 2));
+        parkingSpaces[2].update(new Coach("BF61YTJ", 5, false));
         
         buildGUI();
     }
@@ -68,7 +69,7 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         {
             ParkingSpace currentSelection = (ParkingSpace) e.getSource();
             
-            if (currentSelection.type != null)
+            if (currentSelection.data != null)
             {
                 if (SwingUtilities.isRightMouseButton(e))
                 {
@@ -76,7 +77,11 @@ public class GUI extends JPanel implements ActionListener, MouseListener
                     {
                         parkingSpaces[currentSelection.index].delete();
                     }
-                }                
+                }     
+                else if (SwingUtilities.isLeftMouseButton(e))
+                {
+                    VehicleDetails details = new VehicleDetails(parkingSpaces[currentSelection.index].data);
+                }
             }
             else
             {

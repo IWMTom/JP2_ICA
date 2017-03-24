@@ -9,7 +9,6 @@ public class CarParking
     {
         JFrame mainWindow = new JFrame("Car Parking System");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         mainWindow.setResizable(false);
         mainWindow.setVisible(true);
         

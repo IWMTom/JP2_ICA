@@ -8,28 +8,28 @@ import javax.swing.JButton;
 
 public class ParkingSpace extends JButton
 {
-   
-    VehicleType type;
+    
     Vehicle data;
     int index;
     
-    public enum VehicleType {CAR, LORRY, COACH}
-    
     ParkingSpace(int index, MouseListener mListener)
+    {   
+        this.data = null;
+        this.index = index;
+        
+        buildGUI(mListener);
+    }
+    
+    private void buildGUI(MouseListener mListener)
     {
         this.setBackground(null);
         this.setBorder(BorderFactory.createMatteBorder(0, 5, 5, 0, Color.red));
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));      
-        this.addMouseListener(mListener);
-        
-        this.type = null;
-        this.data = null;
-        this.index = index;
+        this.addMouseListener(mListener);        
     }
     
-    public void update(VehicleType t, Vehicle d)
+    public void update(Vehicle d)
     {
-        this.type = t;
         this.data = d;
         
         if (d != null)
@@ -38,7 +38,6 @@ public class ParkingSpace extends JButton
     
     public void delete()
     {
-        this.type = null;
         this.data = null;
         this.setIcon(null);
     }
