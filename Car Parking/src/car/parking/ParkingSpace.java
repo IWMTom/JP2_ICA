@@ -28,6 +28,14 @@ public class ParkingSpace extends JButton
         this.addMouseListener(mListener);        
     }
     
+    public boolean isEmpty()
+    {
+        if (this.data == null)
+            return true;
+        else
+            return false;
+    }
+    
     public void update(Vehicle d)
     {
         this.data = d;

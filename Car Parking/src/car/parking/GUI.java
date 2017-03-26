@@ -18,11 +18,7 @@ public class GUI extends JPanel implements ActionListener, MouseListener
     
     public GUI()
     {   
-        clearSpaces();
-        
-        parkingSpaces[0].update(new Lorry("VK11LML", 25, 2));
-        parkingSpaces[2].update(new Coach("BF61YTJ", 5, false));
-        
+        clearSpaces();        
         buildGUI();
     }
     
@@ -45,11 +41,87 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         ParkingGrid grid = new ParkingGrid(parkingSpaces);
         this.add(grid, BorderLayout.EAST); 
     }
+    
+    private boolean largeSpacesFull()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (parkingSpaces[i].isEmpty())
+                return false;
+        }
+        
+        return true;
+    }
+    
+    private boolean standardSpacesFull()
+    {
+        for (int i = 4; i < 16; i++)
+        {
+            if (parkingSpaces[i].isEmpty())
+                return false;
+        }
+        
+        return true;
+    }
+    
+    private int nextAvailableLargeSpace()
+    {
+        int space = 0;
+        
+        for (int i = 0; i < 4; i++)
+        {
+            if (parkingSpaces[i].isEmpty())
+            {
+                space = i;
+                break;
+            }
+        }        
+        
+        return space;
+    }
+    
+    private int nextAvailableStandardSpace()
+    {
+        int space = 0;
+        
+        for (int i = 4; i < 16; i++)
+        {
+            if (parkingSpaces[i].isEmpty())
+            {
+                space = i;
+                break;
+            }
+        }        
+        
+        return space;        
+    }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getActionCommand().equals("Clear All"))
+        if (e.getActionCommand().equals("Add Car"))
+        {
+            if (!standardSpacesFull())
+            {
+                parkingSpaces[nextAvailableStandardSpace()].update(new Car("VK11LML", 1.2, false, 5));
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "There are no available empty spaces!", "Car Park Full", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if (e.getActionCommand().equals("Add Lorry"))
+        {
+            if (!largeSpacesFull())
+            {
+                parkingSpaces[nextAvailableLargeSpace()].update(new Lorry("VK11LML", 25, 2));
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "There are no available empty spaces!", "Car Park Full", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if (e.getActionCommand().equals("Clear All"))
         {
             if (JOptionPane.showConfirmDialog(this, "This will clear all data! Are you sure that you wish to continue?", "Are you sure?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
             {
@@ -69,7 +141,7 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         {
             ParkingSpace currentSelection = (ParkingSpace) e.getSource();
             
-            if (currentSelection.data != null)
+            if (!currentSelection.isEmpty())
             {
                 if (SwingUtilities.isRightMouseButton(e))
                 {
