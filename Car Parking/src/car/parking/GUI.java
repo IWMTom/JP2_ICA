@@ -10,7 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-
+/**
+ * GUI.java
+ * An extension of JPanel used to contain all the major GUI
+ * for the application, as well as the Button / Mouse action logic.
+ * 
+ * @author Tom Wilson - S6051830
+ */
 public class GUI extends JPanel implements ActionListener, MouseListener
 {
 
@@ -21,7 +27,11 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         clearSpaces();        
         buildGUI();
     }
-    
+
+    /**
+     * Initialises the array of type ParkingSpace to
+     * empty objects with incrementing indexes
+     */    
     private void clearSpaces()
     {
         for (int i = 0; i < 16; i++)
@@ -29,7 +39,10 @@ public class GUI extends JPanel implements ActionListener, MouseListener
             parkingSpaces[i] = new ParkingSpace(i, this);
         }        
     }    
-    
+
+    /**
+     * Implements the core GUI logic for this class
+     */      
     private void buildGUI()
     {   
         this.setLayout(new BorderLayout());
@@ -41,7 +54,12 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         ParkingGrid grid = new ParkingGrid(parkingSpaces);
         this.add(grid, BorderLayout.EAST); 
     }
-    
+
+    /**
+     * Checks to see if the large spaces are full
+     * 
+     * @return boolean True if full, false if not
+     */      
     private boolean largeSpacesFull()
     {
         for (int i = 0; i < 4; i++)
@@ -52,7 +70,12 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         
         return true;
     }
-    
+
+    /**
+     * Checks to see if the standard spaces are full
+     * 
+     * @return boolean True if full, false if not
+     */       
     private boolean standardSpacesFull()
     {
         for (int i = 4; i < 16; i++)
@@ -63,7 +86,15 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         
         return true;
     }
-    
+
+    /**
+     * Locates the first available empty large space
+     * 
+     * Precondition is that largeSpacesFull() be checked prior
+     * to this method, to prevent data being overwritten
+     * 
+     * @return int Index of next available large space
+     */       
     private int nextAvailableLargeSpace()
     {
         int space = 0;
@@ -79,7 +110,15 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         
         return space;
     }
-    
+
+    /**
+     * Locates the first available empty standard space
+     * 
+     * Precondition is that standardSpacesFull() be checked prior
+     * to this method, to prevent data being overwritten
+     * 
+     * @return int Index of next available standard space
+     */      
     private int nextAvailableStandardSpace()
     {
         int space = 0;
@@ -99,39 +138,63 @@ public class GUI extends JPanel implements ActionListener, MouseListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getActionCommand().equals("Add Car"))
+        String actionCommand = e.getActionCommand();
+        
+        switch (actionCommand)
         {
-            if (!standardSpacesFull())
-            {
-                parkingSpaces[nextAvailableStandardSpace()].update(new Car("VK11LML", 1.2, false, 5));
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this, "There are no available empty spaces!", "Car Park Full", JOptionPane.ERROR_MESSAGE);
-            }
+            case "Add Car":     addCar();
+                                break;
+            case "Add Lorry":   addLorry();
+                                break;
+            case "Clear All":   clearAll();
+                                break;
         }
-        else if (e.getActionCommand().equals("Add Lorry"))
+    }
+
+    /**
+     * Adds a Car
+     */      
+    private void addCar()
+    {
+        if (!standardSpacesFull())
         {
-            if (!largeSpacesFull())
-            {
-                parkingSpaces[nextAvailableLargeSpace()].update(new Lorry("VK11LML", 25, 2));
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this, "There are no available empty spaces!", "Car Park Full", JOptionPane.ERROR_MESSAGE);
-            }
+            parkingSpaces[nextAvailableStandardSpace()].update(new Car("VK11LML", 1.2, false, 5));
         }
-        else if (e.getActionCommand().equals("Clear All"))
+        else
         {
-            if (JOptionPane.showConfirmDialog(this, "This will clear all data! Are you sure that you wish to continue?", "Are you sure?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-            {
-                this.clearSpaces();
-                this.removeAll();
-                this.buildGUI();
-                this.revalidate();
-                this.repaint();
-            }
+            JOptionPane.showMessageDialog(this, "There are no available empty spaces!", "Car Park Full", JOptionPane.ERROR_MESSAGE);
+        }        
+    }
+
+    /**
+     * Adds a Lorry
+     */     
+    private void addLorry()
+    {
+        if (!largeSpacesFull())
+        {
+            parkingSpaces[nextAvailableLargeSpace()].update(new Lorry("VK11LML", 25, 2));
         }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "There are no available empty spaces!", "Car Park Full", JOptionPane.ERROR_MESSAGE);
+        }        
+    }
+
+    /**
+     * Prompts the user to confirm, then clears all 
+     * ParkingSpaces and redraws the grid
+     */      
+    private void clearAll()
+    {
+        if (JOptionPane.showConfirmDialog(this, "This will clear all data! Are you sure that you wish to continue?", "Are you sure?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+        {
+            this.clearSpaces();
+            this.removeAll();
+            this.buildGUI();
+            this.revalidate();
+            this.repaint();
+        }        
     }
 
     @Override

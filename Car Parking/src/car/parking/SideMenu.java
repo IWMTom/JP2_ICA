@@ -8,16 +8,30 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
+/**
+ * SideMenu.java
+ * An extension of JPanel used to display the side menu of buttons
+ * 
+ * @author Tom Wilson - S6051830
+ */
 public class SideMenu extends JPanel
 {
     private final ActionListener listener;
-    
+
+    /**
+     * Class constructor
+     * 
+     * @param listener ActionListener from parent class
+     */    
     public SideMenu(ActionListener listener)
     {
         this.listener = listener;
         buildGUI();
     }
-    
+
+    /**
+     * Implements the core GUI logic for this class
+     */        
     private void buildGUI()
     {
         this.setLayout(new GridLayout(0,1));

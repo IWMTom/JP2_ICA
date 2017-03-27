@@ -10,13 +10,13 @@ public class CarParking
         JFrame mainWindow = new JFrame("Car Parking System");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setResizable(false);
-        mainWindow.setVisible(true);
         
         GUI base = new GUI();
         mainWindow.add(base);
         
         mainWindow.pack();  
         mainWindow.setLocationRelativeTo(null);
+        mainWindow.setVisible(true);
     }
 
 }
