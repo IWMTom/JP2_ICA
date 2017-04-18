@@ -6,9 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import java.io.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * GUI.java
@@ -148,7 +151,13 @@ public class GUI extends JPanel implements ActionListener, MouseListener
                                     break;
             case "Add Lorry":       addLorry();
                                     break;
+            case "Add Coach":       addCoach();
+                                    break;
             case "Clear All":       clearAll();
+                                    break;
+            case "Save":            saveData();
+                                    break;
+            case "Load":            loadData();
                                     break;
             case "Current Total":   currentTotal();
                                     break;
@@ -165,12 +174,18 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         if (!standardSpacesFull())
         {
             AddCar newCarWindow = new AddCar();
-            Car newCar = new Car(newCarWindow.data_regNo, newCarWindow.data_length, newCarWindow.data_disabledBadge, newCarWindow.data_hours);
             
-            currentTotal += newCar.getCharge();
-            overallTotal += newCar.getCharge();
+            if (newCarWindow.valid)
+            {
+                Car newCar = new Car(newCarWindow.data_regNo, newCarWindow.data_length, newCarWindow.data_disabledBadge, newCarWindow.data_hours);
+
+                currentTotal += newCar.getCharge();
+                overallTotal += newCar.getCharge();
+
+                parkingSpaces[nextAvailableStandardSpace()].update(newCar);                
+            }
             
-            parkingSpaces[nextAvailableStandardSpace()].update(newCar);
+            newCarWindow.dispose();
         }
         else
         {
@@ -185,7 +200,46 @@ public class GUI extends JPanel implements ActionListener, MouseListener
     {
         if (!largeSpacesFull())
         {
-            parkingSpaces[nextAvailableLargeSpace()].update(new Lorry("VK11LML", 25, 2));
+            AddLorry newLorryWindow = new AddLorry();
+            
+            if (newLorryWindow.valid)
+            {
+                Lorry newLorry = new Lorry(newLorryWindow.data_regNo, newLorryWindow.data_weight, newLorryWindow.data_days);
+
+                currentTotal += newLorry.getCharge();
+                overallTotal += newLorry.getCharge();
+
+                parkingSpaces[nextAvailableLargeSpace()].update(newLorry);   
+            }
+            
+            newLorryWindow.dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "There are no available empty spaces!", "Car Park Full", JOptionPane.ERROR_MESSAGE);
+        }        
+    }
+    
+    /**
+     * Adds a Coach
+     */     
+    private void addCoach()
+    {
+        if (!largeSpacesFull())
+        {
+            AddCoach newCoachWindow = new AddCoach();
+            
+            if (newCoachWindow.valid)
+            {
+                Coach newCoach = new Coach(newCoachWindow.data_regNo, newCoachWindow.data_passengers, newCoachWindow.data_touristOperator);
+
+                currentTotal += newCoach.getCharge();
+                overallTotal += newCoach.getCharge();
+
+                parkingSpaces[nextAvailableLargeSpace()].update(newCoach);                
+            }
+            
+            newCoachWindow.dispose();
         }
         else
         {
@@ -206,6 +260,71 @@ public class GUI extends JPanel implements ActionListener, MouseListener
             this.buildGUI();
             this.revalidate();
             this.repaint();
+            
+            currentTotal = 0;
+            overallTotal = 0;
+        }        
+    }
+    
+    private void saveData()
+    {
+        JFileChooser chooser = new JFileChooser();
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("dat files (*.dat)", "dat");
+        chooser.addChoosableFileFilter(filter);
+        chooser.setFileFilter(filter);        
+        
+        int result = chooser.showSaveDialog(this);
+        
+        if (result == JFileChooser.APPROVE_OPTION)
+        {
+            try
+            {
+                ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(chooser.getSelectedFile() + ".dat"));
+                output.writeObject(parkingSpaces);
+            }
+            catch (IOException ex)
+            {
+                JOptionPane.showMessageDialog(chooser, "There was an error saving to the file - please try again!", "File Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void loadData()
+    {
+        JFileChooser chooser = new JFileChooser();
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("dat files (*.dat)", "dat");
+        chooser.addChoosableFileFilter(filter);
+        chooser.setFileFilter(filter);
+        
+        int result = chooser.showOpenDialog(this);
+        
+        if (result == JFileChooser.APPROVE_OPTION)
+        {
+            try
+            {
+                ObjectInputStream input = new ObjectInputStream(new FileInputStream(chooser.getSelectedFile()));
+                ParkingSpace[] loadedParkingSpaces = (ParkingSpace[])input.readObject();
+                
+                clearAll();
+                
+                for (int i = 0; i < 16; i++)
+                {
+                    parkingSpaces[i].update(loadedParkingSpaces[i].data);
+                    
+                    if (!parkingSpaces[i].isEmpty())
+                    {
+                        currentTotal += parkingSpaces[i].data.getCharge();
+                    }
+                    
+                }                 
+                
+            }
+            catch (IOException | ClassNotFoundException ex)
+            {
+                JOptionPane.showMessageDialog(chooser, "There was an reading the file - please try again!", "File Error", JOptionPane.ERROR_MESSAGE);
+            }
         }        
     }
     

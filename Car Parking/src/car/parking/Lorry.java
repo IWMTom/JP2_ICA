@@ -72,7 +72,7 @@ public class Lorry extends Vehicle
         {
             charge = 5.00;
         }
-        else if (weight >= 20 && weight < 35)
+        else if (weight >= 20 && weight <= 35)
         {
             charge = 8.00;
         }

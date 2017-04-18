@@ -18,27 +18,26 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 
-public class AddCar extends JDialog implements ActionListener
+public class AddCoach extends JDialog implements ActionListener
 {
 
-    JTextField regNo, length, hours;
-    JCheckBox disabledBadge;
+    JTextField regNo, passengers;
+    JCheckBox touristOperator;
     
     String data_regNo;
-    double data_length;
-    int data_hours;
-    boolean data_disabledBadge = false;
+    int data_passengers;
+    boolean data_touristOperator = false;
     
     boolean valid;
     
-    public AddCar()
+    public AddCoach()
     {
         buildGUI();
     }
     
     private void buildGUI()
     {
-        this.setTitle("Add Car");
+        this.setTitle("Add Coach");
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
@@ -47,7 +46,7 @@ public class AddCar extends JDialog implements ActionListener
         padding.setBorder(new EmptyBorder(10, 10, 10, 10));
         padding.setLayout(new BoxLayout(padding, BoxLayout.Y_AXIS));
         
-        JLabel title = new JLabel("Add Car");
+        JLabel title = new JLabel("Add Coach");
         title.setFont(new Font("Sans Serif", Font.BOLD, 16));
         padding.add(title);
         padding.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -62,24 +61,16 @@ public class AddCar extends JDialog implements ActionListener
         
         padding.add(Box.createRigidArea(new Dimension(0, 5)));
         
-        JLabel lengthLabel = new JLabel("Vehicle Length (metres)");
-        padding.add(lengthLabel);
-        padding.add(Box.createRigidArea(new Dimension(0, 2)));
-        length = new JTextField(10);
-        padding.add(length);
+        touristOperator = new JCheckBox("Tourist Operator");
+        padding.add(touristOperator);
         
         padding.add(Box.createRigidArea(new Dimension(0, 5)));
         
-        disabledBadge = new JCheckBox("Disabled Badge");
-        padding.add(disabledBadge);
-        
-        padding.add(Box.createRigidArea(new Dimension(0, 5)));
-        
-        JLabel hoursLabel = new JLabel("Number of Hours");
-        padding.add(hoursLabel);
+        JLabel passengersLabel = new JLabel("Number of Passengers");
+        padding.add(passengersLabel);
         padding.add(Box.createRigidArea(new Dimension(0, 2)));
-        hours = new JTextField(10);
-        padding.add(hours);
+        passengers = new JTextField(10);
+        padding.add(passengers);
         
         padding.add(Box.createRigidArea(new Dimension(0, 10)));
         
@@ -96,46 +87,29 @@ public class AddCar extends JDialog implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (regNo.getText().equals("") || length.getText().equals("") || hours.getText().equals(""))
+        if (regNo.getText().equals("") || passengers.getText().equals(""))
         {
             JOptionPane.showMessageDialog(rootPane, "You must fill out all the fields!", "Missing Field", JOptionPane.ERROR_MESSAGE);
         }
-        else if (tryParseDouble(length.getText()) == null)
+        else if (tryParseInteger(passengers.getText()) == null)
         {
-            JOptionPane.showMessageDialog(rootPane, "Length must be a valid number", "Invalid Length", JOptionPane.ERROR_MESSAGE);
-        }
-        else if (tryParseInteger(hours.getText()) == null)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Number of hours must be a whole number", "Invalid Hours", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Number of passengers must be a whole number", "Invalid Passengers", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
             data_regNo = regNo.getText();
-            data_length = Double.parseDouble(length.getText());
             
-            if (disabledBadge.isSelected())
+            if (touristOperator.isSelected())
             {
-                data_disabledBadge = true;
+                data_touristOperator = true;
             }
             
-            data_hours = Integer.parseInt(hours.getText());
+            data_passengers = Integer.parseInt(passengers.getText());
             
             valid = true;
             
             this.setVisible(false);
         }
-    }
-    
-    public Double tryParseDouble(String data)
-    {
-        try
-        {
-            return Double.parseDouble(data);
-        }
-        catch (NumberFormatException e)
-        {
-            return null;
-        }       
     }
     
     public Integer tryParseInteger(String data)

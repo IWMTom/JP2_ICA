@@ -3,6 +3,7 @@ package car.parking;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
@@ -13,7 +14,7 @@ import javax.swing.JButton;
  * 
  * @author Tom Wilson - S6051830
  */
-public class ParkingSpace extends JButton
+public class ParkingSpace extends JButton implements Serializable
 {
     
     Vehicle data;
