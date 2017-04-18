@@ -50,7 +50,7 @@ public class Lorry extends Vehicle
     @Override
     public String toString()
     {
-        return "Registration Number: " + regNumber + " | Charge: " + String.format("%1$.2f", charge) + " | Weight: " + weight + " tonnes";
+        return "Registration Number: " + regNumber + " | Charge: £" + String.format("%1$.2f", charge) + " | Weight: " + weight + " tonnes";
     }
     
     @Override

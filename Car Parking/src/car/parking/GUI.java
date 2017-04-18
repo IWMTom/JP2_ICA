@@ -21,6 +21,8 @@ public class GUI extends JPanel implements ActionListener, MouseListener
 {
 
     private final ParkingSpace[] parkingSpaces = new ParkingSpace[16];
+    private double currentTotal = 0.0;
+    private double overallTotal = 0.0;
     
     public GUI()
     {   
@@ -142,12 +144,16 @@ public class GUI extends JPanel implements ActionListener, MouseListener
         
         switch (actionCommand)
         {
-            case "Add Car":     addCar();
-                                break;
-            case "Add Lorry":   addLorry();
-                                break;
-            case "Clear All":   clearAll();
-                                break;
+            case "Add Car":         addCar();
+                                    break;
+            case "Add Lorry":       addLorry();
+                                    break;
+            case "Clear All":       clearAll();
+                                    break;
+            case "Current Total":   currentTotal();
+                                    break;
+            case "Total for Day":   totalForDay();
+                                    break;
         }
     }
 
@@ -158,7 +164,13 @@ public class GUI extends JPanel implements ActionListener, MouseListener
     {
         if (!standardSpacesFull())
         {
-            parkingSpaces[nextAvailableStandardSpace()].update(new Car("VK11LML", 1.2, false, 5));
+            AddCar newCarWindow = new AddCar();
+            Car newCar = new Car(newCarWindow.data_regNo, newCarWindow.data_length, newCarWindow.data_disabledBadge, newCarWindow.data_hours);
+            
+            currentTotal += newCar.getCharge();
+            overallTotal += newCar.getCharge();
+            
+            parkingSpaces[nextAvailableStandardSpace()].update(newCar);
         }
         else
         {
@@ -196,6 +208,16 @@ public class GUI extends JPanel implements ActionListener, MouseListener
             this.repaint();
         }        
     }
+    
+    private void currentTotal()
+    {
+        JOptionPane.showMessageDialog(this, "The total income for all current vehicles is: £" + String.format("%1$.2f", currentTotal));
+    }
+    
+    private void totalForDay()
+    {
+        JOptionPane.showMessageDialog(this, "The overall total income is: £" + String.format("%1$.2f", overallTotal));
+    }
 
     @Override
     public void mouseClicked(MouseEvent e)
@@ -210,6 +232,7 @@ public class GUI extends JPanel implements ActionListener, MouseListener
                 {
                     if (JOptionPane.showConfirmDialog(this, "Do you wish to remove this vehicle?", "Confirm Removal", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                     {
+                        currentTotal -= parkingSpaces[currentSelection.index].data.getCharge();
                         parkingSpaces[currentSelection.index].delete();
                     }
                 }     
