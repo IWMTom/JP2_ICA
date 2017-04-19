@@ -32,6 +32,11 @@ public abstract class Vehicle implements Serializable
         this.regNumber = rn;
     }
     
+    public void setRegistration(String rn)
+    {
+        regNumber = rn;
+    }
+    
     /**
      * Calculates the vehicle charge
      * @return Vehicle Charge

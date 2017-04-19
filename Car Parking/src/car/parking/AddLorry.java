@@ -1,5 +1,7 @@
 package car.parking;
 
+import static car.parking.CarParking.tryParseDouble;
+import static car.parking.CarParking.tryParseInteger;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -75,7 +77,7 @@ public class AddLorry extends JDialog implements ActionListener
         
         padding.add(Box.createRigidArea(new Dimension(0, 10)));
         
-        JButton submit = new JButton("Submit");
+        JButton submit = new JButton("Save");
         submit.addActionListener(this);
         padding.add(submit);
         
@@ -114,30 +116,6 @@ public class AddLorry extends JDialog implements ActionListener
             
             this.setVisible(false);
         }
-    }
-    
-    public Double tryParseDouble(String data)
-    {
-        try
-        {
-            return Double.parseDouble(data);
-        }
-        catch (NumberFormatException e)
-        {
-            return null;
-        }       
-    }
-    
-    public Integer tryParseInteger(String data)
-    {
-        try
-        {
-            return Integer.parseInt(data);
-        }
-        catch (NumberFormatException e)
-        {
-            return null;
-        }       
     }
     
 }

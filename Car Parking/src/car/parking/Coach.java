@@ -38,6 +38,26 @@ public class Coach extends Vehicle
         calcCharge();
     }
 
+    public boolean getTouristOperator()
+    {
+        return touristOperator;
+    }
+    
+    public void setTouristOperator(boolean to)
+    {
+        touristOperator = to;
+    }
+    
+    public int getPassengers()
+    {
+        return numOfPassengers;
+    }
+    
+    public void setPassengers(int p)
+    {
+        numOfPassengers = p;
+    }
+    
     @Override
     public String toString()
     {

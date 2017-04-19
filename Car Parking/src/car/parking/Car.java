@@ -51,6 +51,39 @@ public class Car extends Vehicle
         return length;
     }
     
+    public void setLength(double l)
+    {
+        length = l;
+    }
+    
+    /**
+     * Gets Disabled Badge
+     * @return Disabled Badge
+     */    
+    public boolean getDisabledBadge()
+    {
+        return disabledBadge;
+    }
+    
+    public void setDisabledBadge(boolean db)
+    {
+        disabledBadge = db;
+    }
+    
+    /**
+     * Gets Number of Hours
+     * @return Number of Hours
+     */    
+    public int getHours()
+    {
+        return numOfHours;
+    }
+    
+    public void setHours(int h)
+    {
+        numOfHours = h;
+    }
+    
     @Override
     public String toString()
     {

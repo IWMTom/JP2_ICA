@@ -330,12 +330,12 @@ public class GUI extends JPanel implements ActionListener, MouseListener
     
     private void currentTotal()
     {
-        JOptionPane.showMessageDialog(this, "The total income for all current vehicles is: £" + String.format("%1$.2f", currentTotal));
+        JOptionPane.showMessageDialog(this, "The total income for all current vehicles is: £" + String.format("%1$.2f", currentTotal), "Current Total", JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void totalForDay()
     {
-        JOptionPane.showMessageDialog(this, "The overall total income is: £" + String.format("%1$.2f", overallTotal));
+        JOptionPane.showMessageDialog(this, "The overall total income is: £" + String.format("%1$.2f", overallTotal), "Total for Day", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
@@ -358,6 +358,14 @@ public class GUI extends JPanel implements ActionListener, MouseListener
                 else if (SwingUtilities.isLeftMouseButton(e))
                 {
                     VehicleDetails details = new VehicleDetails(parkingSpaces[currentSelection.index].data);
+                }
+                else if (SwingUtilities.isMiddleMouseButton(e))
+                {
+                    currentTotal -= currentSelection.data.getCharge();
+                    
+                    EditVehicle edit = new EditVehicle(currentSelection.data);  
+                    
+                    currentTotal += currentSelection.data.calcCharge();
                 }
             }
             else

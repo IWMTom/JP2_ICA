@@ -19,4 +19,28 @@ public class CarParking
         mainWindow.setVisible(true);
     }
 
+    public static Integer tryParseInteger(String data)
+    {
+        try
+        {
+            return Integer.parseInt(data);
+        }
+        catch (NumberFormatException e)
+        {
+            return null;
+        }       
+    }  
+    
+    public static Double tryParseDouble(String data)
+    {
+        try
+        {
+            return Double.parseDouble(data);
+        }
+        catch (NumberFormatException e)
+        {
+            return null;
+        }       
+    }
+    
 }

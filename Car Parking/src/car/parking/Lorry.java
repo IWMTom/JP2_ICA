@@ -47,6 +47,21 @@ public class Lorry extends Vehicle
         return weight;
     }
     
+    public void setWeight(double w)
+    {
+        weight = w;
+    }
+    
+    public int getDays()
+    {
+        return numOfDays;
+    }
+    
+    public void setDays(int d)
+    {
+        numOfDays = d;
+    }
+    
     @Override
     public String toString()
     {
