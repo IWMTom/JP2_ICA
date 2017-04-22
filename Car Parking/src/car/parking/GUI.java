@@ -265,7 +265,11 @@ public class GUI extends JPanel implements ActionListener, MouseListener
             overallTotal = 0;
         }        
     }
-    
+
+    /**
+     * Prompts the user to select the folder and filename to
+     * save to, and exports the Parking Spaces to the selected file
+     */       
     private void saveData()
     {
         JFileChooser chooser = new JFileChooser();
@@ -289,7 +293,14 @@ public class GUI extends JPanel implements ActionListener, MouseListener
             }
         }
     }
-    
+
+    /**
+     * Prompts the user to select the folder and filename to
+     * load from, and imports the data from the file.
+     * 
+     * The user is additionally prompted to ensure they wish to
+     * overwrite any unsaved data before continuing.
+     */          
     private void loadData()
     {
         JFileChooser chooser = new JFileChooser();
@@ -327,12 +338,18 @@ public class GUI extends JPanel implements ActionListener, MouseListener
             }
         }        
     }
-    
+
+    /**
+     * Outputs the total income for all vehicles currently in the car park
+     */       
     private void currentTotal()
     {
         JOptionPane.showMessageDialog(this, "The total income for all current vehicles is: £" + String.format("%1$.2f", currentTotal), "Current Total", JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
+    /**
+     * Outputs the total income for the day
+     */      
     private void totalForDay()
     {
         JOptionPane.showMessageDialog(this, "The overall total income is: £" + String.format("%1$.2f", overallTotal), "Total for Day", JOptionPane.INFORMATION_MESSAGE);

@@ -39,24 +39,36 @@ public class Lorry extends Vehicle
     }
     
     /**
-     * Gets Lorry weight
+     * Gets Weight
      * @return Weight
      */
     public double getWeight()
     {
         return weight;
     }
-    
+
+    /**
+     * Sets Weight
+     * @param w Weight
+     */      
     public void setWeight(double w)
     {
         weight = w;
     }
-    
+
+    /**
+     * Gets Number of Days
+     * @return Number of Days
+     */    
     public int getDays()
     {
         return numOfDays;
     }
-    
+
+    /**
+     * Sets Number of Days
+     * @param d Number of Days
+     */          
     public void setDays(int d)
     {
         numOfDays = d;

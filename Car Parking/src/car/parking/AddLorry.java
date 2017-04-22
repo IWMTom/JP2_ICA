@@ -18,7 +18,11 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * AddLorry.java
+ * A dialog that allows the user to add the details of a new lorry
+ * @author Tom Wilson - S6051830
+ */
 public class AddLorry extends JDialog implements ActionListener
 {
 

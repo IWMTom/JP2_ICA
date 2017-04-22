@@ -31,7 +31,11 @@ public abstract class Vehicle implements Serializable
     {
         this.regNumber = rn;
     }
-    
+
+    /**
+     * Sets the Registration Number
+     * @param rn Registration Number
+     */    
     public void setRegistration(String rn)
     {
         regNumber = rn;

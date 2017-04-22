@@ -38,21 +38,37 @@ public class Coach extends Vehicle
         calcCharge();
     }
 
+    /**
+     * Gets Tourist Operator
+     * @return Tourist Operator
+     */    
     public boolean getTouristOperator()
     {
         return touristOperator;
     }
-    
+
+    /**
+     * Sets Tourist Operator
+     * @param to Tourist Operator
+     */        
     public void setTouristOperator(boolean to)
     {
         touristOperator = to;
     }
-    
+
+    /**
+     * Gets Number of Passengers
+     * @return Number of Passengers
+     */     
     public int getPassengers()
     {
         return numOfPassengers;
     }
-    
+
+    /**
+     * Sets Number of Passengers
+     * @param p Number of Passengers
+     */        
     public void setPassengers(int p)
     {
         numOfPassengers = p;

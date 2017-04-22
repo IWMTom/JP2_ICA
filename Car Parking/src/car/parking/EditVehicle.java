@@ -19,7 +19,11 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * EditVehicle.java
+ * Allows the user to edit the details of a Vehicle
+ * @author Tom Wilson - S6051830
+ */
 public class EditVehicle extends JDialog implements ActionListener
 {
     Vehicle data;
@@ -167,15 +171,15 @@ public class EditVehicle extends JDialog implements ActionListener
         
         if (data instanceof Car)
         {
-            if (regNo.getText().equals("") || length.getText().equals("") || hours.getText().equals(""))
+            if (regNo.getText().equals("") || length.getText().equals("") || hours.getText().equals("")) // Checks if all fields have been entered
             {
                 JOptionPane.showMessageDialog(rootPane, "You must fill out all the fields!", "Missing Field", JOptionPane.ERROR_MESSAGE);
             }
-            else if (tryParseDouble(length.getText()) == null)
+            else if (tryParseDouble(length.getText()) == null) // Checks if length is a valid number
             {
                 JOptionPane.showMessageDialog(rootPane, "Length must be a valid number", "Invalid Length", JOptionPane.ERROR_MESSAGE);
             }
-            else if (tryParseInteger(hours.getText()) == null)
+            else if (tryParseInteger(hours.getText()) == null) // Checks if hours is a valid integer
             {
                 JOptionPane.showMessageDialog(rootPane, "Number of hours must be a whole number", "Invalid Hours", JOptionPane.ERROR_MESSAGE);
             }
@@ -190,11 +194,11 @@ public class EditVehicle extends JDialog implements ActionListener
         }
         else if (data instanceof Coach)
         {
-            if (regNo.getText().equals("") || passengers.getText().equals(""))
+            if (regNo.getText().equals("") || passengers.getText().equals("")) // Checks if all fields have been entered
             {
                 JOptionPane.showMessageDialog(rootPane, "You must fill out all the fields!", "Missing Field", JOptionPane.ERROR_MESSAGE);
             }
-            else if (tryParseInteger(passengers.getText()) == null)
+            else if (tryParseInteger(passengers.getText()) == null) // Checks if passengers is a valid integer
             {
                 JOptionPane.showMessageDialog(rootPane, "Number of passengers must be a whole number", "Invalid Passengers", JOptionPane.ERROR_MESSAGE);
             }
@@ -208,19 +212,19 @@ public class EditVehicle extends JDialog implements ActionListener
         }
         else if (data instanceof Lorry)
         {
-            if (regNo.getText().equals("") || weight.getText().equals("") || days.getText().equals(""))
+            if (regNo.getText().equals("") || weight.getText().equals("") || days.getText().equals("")) // Checks if all fields have been entered
             {
                 JOptionPane.showMessageDialog(rootPane, "You must fill out all the fields!", "Missing Field", JOptionPane.ERROR_MESSAGE);
             }
-            else if (tryParseDouble(weight.getText()) == null)
+            else if (tryParseDouble(weight.getText()) == null) // Checks if weight is a valid number
             {
                 JOptionPane.showMessageDialog(rootPane, "Weight must be a valid number", "Invalid Weight", JOptionPane.ERROR_MESSAGE);
             }
-            else if (tryParseInteger(days.getText()) == null)
+            else if (tryParseInteger(days.getText()) == null) // Checks if days is a valid integer
             {
                 JOptionPane.showMessageDialog(rootPane, "Number of days must be a whole number", "Invalid Days", JOptionPane.ERROR_MESSAGE);
             }
-            else if (tryParseDouble(weight.getText()) > 35)
+            else if (tryParseDouble(weight.getText()) > 35) // Checks if weight is below 35 tonnes
             {
                 JOptionPane.showMessageDialog(rootPane, "Weight cannot be above 35 tonnes", "Invalid Weight", JOptionPane.ERROR_MESSAGE);
             }

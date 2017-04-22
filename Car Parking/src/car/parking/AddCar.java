@@ -19,7 +19,11 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * AddCar.java
+ * A dialog that allows the user to add the details of a new car
+ * @author Tom Wilson - S6051830
+ */
 public class AddCar extends JDialog implements ActionListener
 {
 
@@ -98,15 +102,15 @@ public class AddCar extends JDialog implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (regNo.getText().equals("") || length.getText().equals("") || hours.getText().equals(""))
+        if (regNo.getText().equals("") || length.getText().equals("") || hours.getText().equals("")) // Checks if all fields have been entered
         {
             JOptionPane.showMessageDialog(rootPane, "You must fill out all the fields!", "Missing Field", JOptionPane.ERROR_MESSAGE);
         }
-        else if (tryParseDouble(length.getText()) == null)
+        else if (tryParseDouble(length.getText()) == null) // Checks if Length is a valid number
         {
             JOptionPane.showMessageDialog(rootPane, "Length must be a valid number", "Invalid Length", JOptionPane.ERROR_MESSAGE);
         }
-        else if (tryParseInteger(hours.getText()) == null)
+        else if (tryParseInteger(hours.getText()) == null) // Checks if Hours is a valid integer
         {
             JOptionPane.showMessageDialog(rootPane, "Number of hours must be a whole number", "Invalid Hours", JOptionPane.ERROR_MESSAGE);
         }

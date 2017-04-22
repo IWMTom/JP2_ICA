@@ -19,6 +19,12 @@ public class CarParking
         mainWindow.setVisible(true);
     }
 
+    
+    /**
+     * Tests if a string can be converted to an integer
+     * @param data Data to be parsed
+     * @return Integer if parsed, or null if failed
+     */    
     public static Integer tryParseInteger(String data)
     {
         try
@@ -30,7 +36,12 @@ public class CarParking
             return null;
         }       
     }  
-    
+
+    /**
+     * Tests if a string can be converted to an double
+     * @param data Data to be parsed
+     * @return Double if parsed, or null if failed
+     */     
     public static Double tryParseDouble(String data)
     {
         try

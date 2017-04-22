@@ -18,7 +18,11 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * AddCoach.java
+ * A dialog that allows the user to add the details of a new coach
+ * @author Tom Wilson - S6051830
+ */
 public class AddCoach extends JDialog implements ActionListener
 {
 
@@ -88,11 +92,11 @@ public class AddCoach extends JDialog implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (regNo.getText().equals("") || passengers.getText().equals(""))
+        if (regNo.getText().equals("") || passengers.getText().equals("")) // Checks if all fields have been entered
         {
             JOptionPane.showMessageDialog(rootPane, "You must fill out all the fields!", "Missing Field", JOptionPane.ERROR_MESSAGE);
         }
-        else if (tryParseInteger(passengers.getText()) == null)
+        else if (tryParseInteger(passengers.getText()) == null) // Checks if Passengers is a valid integer
         {
             JOptionPane.showMessageDialog(rootPane, "Number of passengers must be a whole number", "Invalid Passengers", JOptionPane.ERROR_MESSAGE);
         }

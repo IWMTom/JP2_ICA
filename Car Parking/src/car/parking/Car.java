@@ -50,7 +50,11 @@ public class Car extends Vehicle
     {
         return length;
     }
-    
+
+    /**
+     * Sets Car length
+     * @param l Length
+     */    
     public void setLength(double l)
     {
         length = l;
@@ -64,7 +68,11 @@ public class Car extends Vehicle
     {
         return disabledBadge;
     }
-    
+
+    /**
+     * Sets Disabled Badge
+     * @param db Disabled Badge
+     */       
     public void setDisabledBadge(boolean db)
     {
         disabledBadge = db;
@@ -78,7 +86,11 @@ public class Car extends Vehicle
     {
         return numOfHours;
     }
-    
+
+    /**
+     * Sets Number of Hours
+     * @param h Number of Hours
+     */    
     public void setHours(int h)
     {
         numOfHours = h;

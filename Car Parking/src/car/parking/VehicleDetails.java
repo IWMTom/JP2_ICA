@@ -6,7 +6,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * VehicleDetails.java
+ * Displays the details of a selected vehicle to the user
+ * @author Tom Wilson - S6051830
+ */
 public class VehicleDetails extends JDialog
 {
     Vehicle data;
